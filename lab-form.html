@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sedimentary Rocks — Lab Identification Form</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  :root {
+    --sand: #e8d5b0;
+    --sandstone: #c8a96e;
+    --rust: #8b4513;
+    --clay: #a0522d;
+    --shale: #4a4a5a;
+    --limestone: #d4cfc5;
+    --dark: #2c2416;
+    --text: #1a1209;
+    --accent: #6b4226;
+    --highlight: #d4850a;
+    --bg: #f5ede0;
+    --card: #fdf8f0;
+    --success: #4a8a4a;
+    --error: #8a2020;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dark);
+    color: var(--sand);
+  }
+  .header-stripe {
+    height: 6px;
+    background: repeating-linear-gradient(90deg, var(--sandstone) 0px, var(--sandstone) 40px, var(--rust) 40px, var(--rust) 80px, var(--shale) 80px, var(--shale) 120px, var(--limestone) 120px, var(--limestone) 160px);
+  }
+  .header-inner {
+    padding: 1.8rem 2.5rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+  }
+  .header-label {
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sandstone);
+    margin-bottom: 0.2rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--sand);
+    line-height: 1.15;
+  }
+  header h1 em { font-style: italic; color: var(--sandstone); }
+  .header-meta {
+    margin-left: auto;
+    font-size: 0.78rem;
+    color: var(--limestone);
+    font-weight: 300;
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* STUDENT INFO */
+  .student-bar {
+    background: var(--accent);
+    padding: 1rem 2.5rem;
+  }
+  .student-fields {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 0.8rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .student-field label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 0.3rem;
+  }
+  .student-field input {
+    width: 100%;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem;
+    padding: 0.45rem 0.7rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 3px;
+    color: white;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .student-field input::placeholder { color: rgba(255,255,255,0.4); }
+  .student-field input:focus { background: rgba(255,255,255,0.2); border-color: var(--sandstone); }
+
+  /* INSTRUCTIONS */
+  .instructions {
+    background: #f0e8d5;
+    border-bottom: 1px solid #d4c5a8;
+    padding: 0.9rem 2.5rem;
+    font-size: 0.83rem;
+    color: #5a4030;
+  }
+
+  /* PROGRESS */
+  .progress-bar-wrap {
+    background: var(--card);
+    border-bottom: 1px solid #d4c5a8;
+    padding: 0.7rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .progress-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .progress-track {
+    flex: 1;
+    height: 8px;
+    background: #e0d5c0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--rust), var(--highlight));
+    border-radius: 4px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-count {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* MAIN */
+  .main-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  /* SPECIMEN FORM CARD */
+  .specimen-form {
+    background: var(--card);
+    border: 1px solid #ddd3c0;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s;
+  }
+  .specimen-form.complete {
+    border-color: #5a8a5a;
+    box-shadow: 0 0 0 1px rgba(90,138,90,0.3);
+  }
+  .specimen-form.incomplete-warning {
+    border-color: var(--highlight);
+    box-shadow: 0 0 0 1px rgba(212,133,10,0.3);
+  }
+
+  .form-header {
+    background: var(--dark);
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .form-header:hover { background: #3a2e20; }
+  .spec-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sandstone);
+    min-width: 80px;
+  }
+  .spec-preview {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--sand);
+    flex: 1;
+  }
+  .spec-status {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+  }
+  .status-empty { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); }
+  .status-partial { background: rgba(212,133,10,0.3); color: #d4a070; }
+  .status-complete { background: rgba(90,138,90,0.3); color: #90d090; }
+  .form-toggle { color: var(--sandstone); font-size: 0.9rem; }
+
+  /* FORM BODY */
+  .form-body {
+    padding: 1.2rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem 1.5rem;
+  }
+  .form-body.collapsed { display: none; }
+
+  .field-group { display: flex; flex-direction: column; gap: 0.3rem; }
+  .field-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  label span { color: var(--rust); }
+
+  select, input[type="text"], textarea {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.88rem;
+    padding: 0.45rem 0.7rem;
+    background: #faf5ec;
+    border: 1.5px solid #d4c5a8;
+    border-radius: 4px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+    width: 100%;
+  }
+  select:focus, input[type="text"]:focus, textarea:focus {
+    border-color: var(--highlight);
+    background: white;
+  }
+  textarea { resize: vertical; min-height: 60px; line-height: 1.5; }
+
+  /* RADIO GROUP */
+  .radio-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+    background: #faf5ec;
+    border: 1.5px solid #d4c5a8;
+    border-radius: 4px;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .radio-option:hover { background: #f0e8d5; border-color: var(--highlight); }
+  .radio-option input { display: none; }
+  .radio-option.selected { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* PART 2: SHORT ANSWER */
+  .part-divider {
+    background: var(--accent);
+    color: var(--sand);
+    padding: 0.7rem 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 2rem 0 0.8rem;
+    border-radius: 6px;
+  }
+
+  .short-answer-card {
+    background: var(--card);
+    border: 1px solid #ddd3c0;
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .sa-question {
+    font-size: 0.9rem;
+    color: #3a2d1e;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+  }
+  .sa-number {
+    font-weight: 700;
+    color: var(--rust);
+  }
+
+  /* SUBMIT */
+  .submit-section {
+    background: var(--card);
+    border: 1px solid #ddd3c0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    text-align: center;
+  }
+  .submit-note {
+    font-size: 0.82rem;
+    color: #6a5040;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  .btn-row {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.8rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-primary {
+    background: var(--rust);
+    color: white;
+  }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-secondary {
+    background: #f0e8d5;
+    color: var(--accent);
+    border: 1.5px solid #d4c5a8;
+  }
+  .btn-secondary:hover { background: #e8dcc8; }
+
+  /* VALIDATION MESSAGE */
+  .val-message {
+    display: none;
+    padding: 0.8rem 1rem;
+    border-radius: 4px;
+    font-size: 0.83rem;
+    margin-top: 0.8rem;
+  }
+  .val-message.success { background: #e8f4e8; color: #2a4a2a; border-left: 3px solid #5a8a5a; display: block; }
+  .val-message.warning { background: #f8f0e0; color: #4a3010; border-left: 3px solid #c08020; display: block; }
+
+  /* PRINT STYLES */
+  @media print {
+    .progress-bar-wrap, .btn-row, .student-bar { display: none !important; }
+    .form-body.collapsed { display: grid !important; }
+    header, .instructions { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--dark);
+    color: var(--limestone);
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    margin-top: 2rem;
+  }
+  .footer a { color: var(--sandstone); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .header-inner { flex-direction: column; gap: 0.5rem; }
+    .header-meta { text-align: left; margin-left: 0; }
+    .student-fields { grid-template-columns: 1fr 1fr; }
+    .form-body { grid-template-columns: 1fr; }
+    .form-body .field-group.full { grid-column: 1; }
+    .header-inner, .student-bar, .instructions { padding-left: 1rem; padding-right: 1rem; }
+    .main-wrap { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div>
+      <div class="header-label">EES 2001 · Physical Geology</div>
+      <h1>Sedimentary Rocks<br><em>Lab Identification Form</em></h1>
+    </div>
+    <div class="header-meta">
+      15 Specimens · 5 Short-Answer Questions<br>
+      Complete all fields before submitting<br>
+      Use the Lab Guide (Site 1) &amp; ID site (Site 2)
+    </div>
+  </div>
+</header>
+
+<div class="student-bar">
+  <div class="student-fields">
+    <div class="student-field">
+      <label>Full Name</label>
+      <input type="text" id="stu-name" placeholder="Last, First" oninput="updateProgress()">
+    </div>
+    <div class="student-field">
+      <label>Temple ID</label>
+      <input type="text" id="stu-id" placeholder="9xxxxxxxx" oninput="updateProgress()">
+    </div>
+    <div class="student-field">
+      <label>Lab Section</label>
+      <input type="text" id="stu-section" placeholder="e.g. 001" oninput="updateProgress()">
+    </div>
+    <div class="student-field">
+      <label>Date</label>
+      <input type="text" id="stu-date" placeholder="MM/DD/YYYY" oninput="updateProgress()">
+    </div>
+  </div>
+</div>
+
+<div class="instructions">
+  <strong>Instructions:</strong> For each specimen (Sites 1 &amp; 2), record rock type classification, texture properties, rock name, and depositional environment. Use the Lab Guide reference tables and the ID Decision Tree. All fields marked with <span style="color: var(--rust); font-weight: 700;">*</span> are required.
+</div>
+
+<div class="progress-bar-wrap">
+  <span class="progress-label">Progress</span>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="progress-count" id="progressCount">0 / 15 specimens complete</span>
+</div>
+
+<div class="main-wrap">
+
+  <!-- ===== PART 1: ROCK IDENTIFICATION ===== -->
+  <div class="part-divider">Part 1: Rock Identification (15 Specimens)</div>
+
+  <!-- SPECIMEN TEMPLATE: repeated 15 times with unique IDs -->
+
+  <div class="specimen-form" id="form-S1">
+    <div class="form-header" onclick="toggleForm('S1')">
+      <span class="spec-num">S-1</span>
+      <span class="spec-preview" id="preview-S1">Specimen S-1 — Click to expand</span>
+      <span class="spec-status status-empty" id="status-S1">Not started</span>
+      <span class="form-toggle" id="toggle-S1">▼</span>
+    </div>
+    <div class="form-body collapsed" id="body-S1">
+      <div class="field-group">
+        <label>Rock Type Classification <span>*</span></label>
+        <select id="S1-type" onchange="updateSpecimen('S1')">
+          <option value="">— Select type —</option>
+          <option>Clastic / Detrital</option>
+          <option>Chemical</option>
+          <option>Biochemical</option>
+          <option>Organic</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Grain Size <span>*</span></label>
+        <select id="S1-grainsize" onchange="updateSpecimen('S1')">
+          <option value="">— Select —</option>
+          <option>Gravel / Pebble (&gt;2 mm)</option>
+          <option>Coarse Sand (0.5–2 mm)</option>
+          <option>Medium Sand (0.25–0.5 mm)</option>
+          <option>Fine Sand (0.06–0.25 mm)</option>
+          <option>Silt (0.004–0.06 mm)</option>
+          <option>Clay (&lt;0.004 mm)</option>
+          <option>N/A — Chemical/Crystalline</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Grain Roundness</label>
+        <select id="S1-roundness" onchange="updateSpecimen('S1')">
+          <option value="">— Select —</option>
+          <option>Very Angular</option>
+          <option>Angular</option>
+          <option>Subangular</option>
+          <option>Subrounded</option>
+          <option>Rounded</option>
+          <option>Well Rounded</option>
+          <option>N/A — too fine to assess</option>
+          <option>N/A — Chemical</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Grain Sorting</label>
+        <select id="S1-sorting" onchange="updateSpecimen('S1')">
+          <option value="">— Select —</option>
+          <option>Very Well Sorted</option>
+          <option>Well Sorted</option>
+          <option>Moderately Sorted</option>
+          <option>Poorly Sorted</option>
+          <option>Very Poorly Sorted</option>
+          <option>N/A — Chemical</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Color(s) Observed <span>*</span></label>
+        <input type="text" id="S1-color" placeholder="e.g. dark gray, black" oninput="updateSpecimen('S1')">
+      </div>
+      <div class="field-group">
+        <label>Acid (HCl) Reaction</label>
+        <div class="radio-group" id="S1-acid">
+          <label class="radio-option" onclick="selectRadio(this, 'S1-acid')"><input type="radio" name="S1-acid" value="Vigorous fizz"> Vigorous fizz</label>
+          <label class="radio-option" onclick="selectRadio(this, 'S1-acid')"><input type="radio" name="S1-acid" value="Weak fizz"> Weak fizz</label>
+          <label class="radio-option" onclick="selectRadio(this, 'S1-acid')"><input type="radio" name="S1-acid" value="No reaction"> No reaction</label>
+          <label class="radio-option" onclick="selectRadio(this, 'S1-acid')"><input type="radio" name="S1-acid" value="Not tested"> Not tested</label>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Other Notable Properties</label>
+        <input type="text" id="S1-props" placeholder="e.g. fissile, fossils visible, scratches glass" oninput="updateSpecimen('S1')">
+      </div>
+      <div class="field-group full">
+        <label>Rock Name <span>*</span></label>
+        <select id="S1-name" onchange="updateSpecimen('S1')">
+          <option value="">— Select rock name —</option>
+          <optgroup label="Clastic Rocks">
+            <option>Shale</option>
+            <option>Mudstone</option>
+            <option>Claystone</option>
+            <option>Siltstone</option>
+            <option>Quartz Sandstone</option>
+            <option>Arkose</option>
+            <option>Graywacke</option>
+            <option>Conglomerate</option>
+            <option>Breccia</option>
+          </optgroup>
+          <optgroup label="Chemical / Biochemical Rocks">
+            <option>Crystalline Limestone</option>
+            <option>Micritic Limestone</option>
+            <option>Oolitic Limestone</option>
+            <option>Fossiliferous Limestone</option>
+            <option>Coquina</option>
+            <option>Chalk</option>
+            <option>Dolostone</option>
+            <option>Chert</option>
+            <option>Flint</option>
+            <option>Jasper</option>
+            <option>Rock Gypsum</option>
+            <option>Rock Salt (Halite)</option>
+          </optgroup>
+          <optgroup label="Organic Rocks">
+            <option>Coal (Bituminous)</option>
+            <option>Coal (Anthracite)</option>
+            <option>Lignite</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="field-group full">
+        <label>Depositional Environment <span>*</span></label>
+        <select id="S1-env" onchange="updateSpecimen('S1')">
+          <option value="">— Select environment —</option>
+          <optgroup label="Continental">
+            <option>River Channel</option>
+            <option>Floodplain</option>
+            <option>Alluvial Fan</option>
+            <option>Base of Cliff / Talus</option>
+            <option>Aeolian Dune (Wind)</option>
+            <option>Glacial (Till)</option>
+            <option>Glacial Outwash</option>
+            <option>Swamp / Peat Bog</option>
+            <option>Freshwater Lake</option>
+            <option>Playa Lake (Desert Lake)</option>
+          </optgroup>
+          <optgroup label="Transitional">
+            <option>Delta</option>
+            <option>Beach / Barrier Island</option>
+            <option>Tidal Flat</option>
+          </optgroup>
+          <optgroup label="Marine">
+            <option>Inner Shelf (Shallow Marine)</option>
+            <option>Middle Shelf</option>
+            <option>Outer Shelf / Carbonate Platform</option>
+            <option>Reef</option>
+            <option>Continental Slope / Rise (Turbidite)</option>
+            <option>Deep Marine</option>
+            <option>Evaporite Basin</option>
+          </optgroup>
+          <option>Multiple Possible / Uncertain</option>
+        </select>
+      </div>
+      <div class="field-group full">
+        <label>Justification — Why did you identify it this way? <span>*</span></label>
+        <textarea id="S1-just" rows="2" placeholder="Describe the key properties you used to make your identification..." oninput="updateSpecimen('S1')"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SPECIMENS S2 through S15 — generated by script ===== -->
+  <div id="dynamicForms"></div>
+
+  <!-- ===== PART 2: SHORT ANSWER ===== -->
+  <div class="part-divider">Part 2: Short Answer Questions</div>
+
+  <div class="short-answer-card">
+    <div class="sa-question"><span class="sa-number">Q1.</span> Two sandstones look very similar in grain size and color, but one is a quartz sandstone and the other is an arkose. What specific properties would you look for to distinguish them, and what do these differences tell you about how far each rock traveled from its source?</div>
+    <textarea id="SA1" rows="4" placeholder="Your answer..." oninput="updateSAProgress()" style="width:100%; margin-top:0.4rem;"></textarea>
+  </div>
+
+  <div class="short-answer-card">
+    <div class="sa-question"><span class="sa-number">Q2.</span> A geologist finds a rock layer that transitions from coarse conglomerate at the base to fine shale at the top, all within a single exposure. Using what you know about grain size, sorting, and depositional environments, propose an interpretation for how this sequence might have formed. What does the fining-upward pattern suggest?</div>
+    <textarea id="SA2" rows="4" placeholder="Your answer..." oninput="updateSAProgress()" style="width:100%; margin-top:0.4rem;"></textarea>
+  </div>
+
+  <div class="short-answer-card">
+    <div class="sa-question"><span class="sa-number">Q3.</span> You are examining a limestone sample. Describe the step-by-step process (the ID decision tree) you would follow to determine the specific type of limestone (e.g., micritic, oolitic, fossiliferous, crystalline, coquina, chalk). What observations and tests would you perform at each step?</div>
+    <textarea id="SA3" rows="4" placeholder="Your answer..." oninput="updateSAProgress()" style="width:100%; margin-top:0.4rem;"></textarea>
+  </div>
+
+  <div class="short-answer-card">
+    <div class="sa-question"><span class="sa-number">Q4.</span> A rock layer contains mudcracks, evaporite minerals, and thin beds of shale with occasional layers of poorly-sorted conglomerate. What depositional environment best explains this combination of features? Justify your answer by explaining what each individual feature tells you about the conditions during deposition.</div>
+    <textarea id="SA4" rows="4" placeholder="Your answer..." oninput="updateSAProgress()" style="width:100%; margin-top:0.4rem;"></textarea>
+  </div>
+
+  <div class="short-answer-card">
+    <div class="sa-question"><span class="sa-number">Q5.</span> Explain why chemical weathering and physical (mechanical) weathering are described as working <em>together</em>. How does the surface area concept help explain their interaction? Give a specific example from the lecture that illustrates this relationship.</div>
+    <textarea id="SA5" rows="4" placeholder="Your answer..." oninput="updateSAProgress()" style="width:100%; margin-top:0.4rem;"></textarea>
+  </div>
+
+  <!-- SUBMIT SECTION -->
+  <div class="submit-section">
+    <div class="submit-note">
+      <strong>Before submitting:</strong> Verify your name, Temple ID, and lab section are filled in. All 15 specimens should be complete (rock name, type, environment, and justification). Check that all 5 short-answer questions are answered.<br><br>
+      Copy the text from the "Print / Copy for Submission" button and paste it into your Canvas assignment submission box, or download and submit as directed by your instructor.
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="validateAll()">✓ Check Completion</button>
+      <button class="btn btn-secondary" onclick="copySubmission()">📋 Print / Copy for Submission</button>
+      <button class="btn btn-primary" onclick="clearForm()">↺ Clear Form</button>
+    </div>
+    <div class="val-message" id="valMsg"></div>
+  </div>
+
+</div><!-- /main-wrap -->
+
+<footer class="footer">
+  <p>EES 2001 — Physical Geology | <a href="index.html">← Lab Guide (Site 1)</a> | <a href="sed-rock-id.html">← Specimen ID (Site 2)</a> | Lab Form (Site 3)</p>
+</footer>
+
+<script>
+// ====== DATA CONFIG: Specimens S2–S15 ======
+const specimens = [
+  { id: 'S2',  label: 'Specimen S-2' },
+  { id: 'S3',  label: 'Specimen S-3' },
+  { id: 'S4',  label: 'Specimen S-4' },
+  { id: 'S5',  label: 'Specimen S-5' },
+  { id: 'S6',  label: 'Specimen S-6' },
+  { id: 'S7',  label: 'Specimen S-7' },
+  { id: 'S8',  label: 'Specimen S-8' },
+  { id: 'S9',  label: 'Specimen S-9' },
+  { id: 'S10', label: 'Specimen S-10' },
+  { id: 'S11', label: 'Specimen S-11' },
+  { id: 'S12', label: 'Specimen S-12' },
+  { id: 'S13', label: 'Specimen S-13' },
+  { id: 'S14', label: 'Specimen S-14' },
+  { id: 'S15', label: 'Specimen S-15' },
+];
+
+const rockNameOptions = `
+  <optgroup label="Clastic Rocks">
+    <option>Shale</option><option>Mudstone</option><option>Claystone</option>
+    <option>Siltstone</option><option>Quartz Sandstone</option>
+    <option>Arkose</option><option>Graywacke</option>
+    <option>Conglomerate</option><option>Breccia</option>
+  </optgroup>
+  <optgroup label="Chemical / Biochemical Rocks">
+    <option>Crystalline Limestone</option><option>Micritic Limestone</option>
+    <option>Oolitic Limestone</option><option>Fossiliferous Limestone</option>
+    <option>Coquina</option><option>Chalk</option><option>Dolostone</option>
+    <option>Chert</option><option>Flint</option><option>Jasper</option>
+    <option>Rock Gypsum</option><option>Rock Salt (Halite)</option>
+  </optgroup>
+  <optgroup label="Organic Rocks">
+    <option>Coal (Bituminous)</option><option>Coal (Anthracite)</option><option>Lignite</option>
+  </optgroup>`;
+
+const envOptions = `
+  <optgroup label="Continental">
+    <option>River Channel</option><option>Floodplain</option>
+    <option>Alluvial Fan</option><option>Base of Cliff / Talus</option>
+    <option>Aeolian Dune (Wind)</option><option>Glacial (Till)</option>
+    <option>Glacial Outwash</option><option>Swamp / Peat Bog</option>
+    <option>Freshwater Lake</option><option>Playa Lake (Desert Lake)</option>
+  </optgroup>
+  <optgroup label="Transitional">
+    <option>Delta</option><option>Beach / Barrier Island</option><option>Tidal Flat</option>
+  </optgroup>
+  <optgroup label="Marine">
+    <option>Inner Shelf (Shallow Marine)</option><option>Middle Shelf</option>
+    <option>Outer Shelf / Carbonate Platform</option><option>Reef</option>
+    <option>Continental Slope / Rise (Turbidite)</option><option>Deep Marine</option>
+    <option>Evaporite Basin</option>
+  </optgroup>
+  <option>Multiple Possible / Uncertain</option>`;
+
+// Build dynamic forms
+const container = document.getElementById('dynamicForms');
+specimens.forEach(sp => {
+  const id = sp.id;
+  container.innerHTML += `
+  <div class="specimen-form" id="form-${id}">
+    <div class="form-header" onclick="toggleForm('${id}')">
+      <span class="spec-num">${id.replace('S','S-')}</span>
+      <span class="spec-preview" id="preview-${id}">${sp.label} — Click to expand</span>
+      <span class="spec-status status-empty" id="status-${id}">Not started</span>
+      <span class="form-toggle" id="toggle-${id}">▼</span>
+    </div>
+    <div class="form-body collapsed" id="body-${id}">
+      <div class="field-group">
+        <label>Rock Type Classification <span>*</span></label>
+        <select id="${id}-type" onchange="updateSpecimen('${id}')">
+          <option value="">— Select type —</option>
+          <option>Clastic / Detrital</option>
+          <option>Chemical</option>
+          <option>Biochemical</option>
+          <option>Organic</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Grain Size <span>*</span></label>
+        <select id="${id}-grainsize" onchange="updateSpecimen('${id}')">
+          <option value="">— Select —</option>
+          <option>Gravel / Pebble (&gt;2 mm)</option>
+          <option>Coarse Sand (0.5–2 mm)</option>
+          <option>Medium Sand (0.25–0.5 mm)</option>
+          <option>Fine Sand (0.06–0.25 mm)</option>
+          <option>Silt (0.004–0.06 mm)</option>
+          <option>Clay (&lt;0.004 mm)</option>
+          <option>N/A — Chemical/Crystalline</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Grain Roundness</label>
+        <select id="${id}-roundness" onchange="updateSpecimen('${id}')">
+          <option value="">— Select —</option>
+          <option>Very Angular</option><option>Angular</option>
+          <option>Subangular</option><option>Subrounded</option>
+          <option>Rounded</option><option>Well Rounded</option>
+          <option>N/A — too fine to assess</option>
+          <option>N/A — Chemical</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Grain Sorting</label>
+        <select id="${id}-sorting" onchange="updateSpecimen('${id}')">
+          <option value="">— Select —</option>
+          <option>Very Well Sorted</option><option>Well Sorted</option>
+          <option>Moderately Sorted</option><option>Poorly Sorted</option>
+          <option>Very Poorly Sorted</option><option>N/A — Chemical</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Color(s) Observed <span>*</span></label>
+        <input type="text" id="${id}-color" placeholder="e.g. gray, tan, reddish" oninput="updateSpecimen('${id}')">
+      </div>
+      <div class="field-group">
+        <label>Acid (HCl) Reaction</label>
+        <div class="radio-group" id="${id}-acid">
+          <label class="radio-option" onclick="selectRadio(this,'${id}-acid')"><input type="radio" name="${id}-acid" value="Vigorous fizz"> Vigorous fizz</label>
+          <label class="radio-option" onclick="selectRadio(this,'${id}-acid')"><input type="radio" name="${id}-acid" value="Weak fizz"> Weak fizz</label>
+          <label class="radio-option" onclick="selectRadio(this,'${id}-acid')"><input type="radio" name="${id}-acid" value="No reaction"> No reaction</label>
+          <label class="radio-option" onclick="selectRadio(this,'${id}-acid')"><input type="radio" name="${id}-acid" value="Not tested"> Not tested</label>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Other Notable Properties</label>
+        <input type="text" id="${id}-props" placeholder="e.g. fissile, fossils visible, scratches glass" oninput="updateSpecimen('${id}')">
+      </div>
+      <div class="field-group full">
+        <label>Rock Name <span>*</span></label>
+        <select id="${id}-name" onchange="updateSpecimen('${id}')">
+          <option value="">— Select rock name —</option>${rockNameOptions}
+        </select>
+      </div>
+      <div class="field-group full">
+        <label>Depositional Environment <span>*</span></label>
+        <select id="${id}-env" onchange="updateSpecimen('${id}')">
+          <option value="">— Select environment —</option>${envOptions}
+        </select>
+      </div>
+      <div class="field-group full">
+        <label>Justification — Why did you identify it this way? <span>*</span></label>
+        <textarea id="${id}-just" rows="2" placeholder="Describe the key properties you used to make your identification..." oninput="updateSpecimen('${id}')"></textarea>
+      </div>
+    </div>
+  </div>`;
+});
+
+// ====== TOGGLE ======
+function toggleForm(id) {
+  const body = document.getElementById('body-' + id);
+  const toggle = document.getElementById('toggle-' + id);
+  const isCollapsed = body.classList.contains('collapsed');
+  body.classList.toggle('collapsed', !isCollapsed);
+  toggle.textContent = isCollapsed ? '▲' : '▼';
+}
+
+// ====== RADIO ======
+function selectRadio(label, groupId) {
+  document.querySelectorAll(`#${groupId} .radio-option`).forEach(l => l.classList.remove('selected'));
+  label.classList.add('selected');
+  setTimeout(() => updateProgress(), 50);
+}
+
+// ====== SPECIMEN UPDATE ======
+function updateSpecimen(id) {
+  const nameVal = document.getElementById(id + '-name')?.value || '';
+  const typeVal = document.getElementById(id + '-type')?.value || '';
+  const colorVal = document.getElementById(id + '-color')?.value || '';
+  const envVal = document.getElementById(id + '-env')?.value || '';
+  const justVal = document.getElementById(id + '-just')?.value || '';
+
+  // Preview
+  const preview = document.getElementById('preview-' + id);
+  if (nameVal) preview.textContent = nameVal + (envVal ? ' · ' + envVal : '');
+  else preview.textContent = 'Specimen ' + id.replace('S','S-') + ' — Click to expand';
+
+  // Required fields check
+  const required = [nameVal, typeVal, colorVal, envVal, justVal];
+  const filled = required.filter(v => v.trim() !== '').length;
+  const status = document.getElementById('status-' + id);
+  const card = document.getElementById('form-' + id);
+
+  if (filled === 0) {
+    status.textContent = 'Not started'; status.className = 'spec-status status-empty';
+    card.classList.remove('complete', 'incomplete-warning');
+  } else if (filled < required.length) {
+    status.textContent = filled + '/5 filled'; status.className = 'spec-status status-partial';
+    card.classList.remove('complete'); card.classList.add('incomplete-warning');
+  } else {
+    status.textContent = '✓ Complete'; status.className = 'spec-status status-complete';
+    card.classList.add('complete'); card.classList.remove('incomplete-warning');
+  }
+
+  updateProgress();
+}
+
+// ====== PROGRESS ======
+function updateProgress() {
+  const allIds = ['S1', ...specimens.map(s => s.id)];
+  let complete = 0;
+  allIds.forEach(id => {
+    const n = document.getElementById(id + '-name')?.value || '';
+    const t = document.getElementById(id + '-type')?.value || '';
+    const c = document.getElementById(id + '-color')?.value || '';
+    const e = document.getElementById(id + '-env')?.value || '';
+    const j = document.getElementById(id + '-just')?.value || '';
+    if (n && t && c && e && j) complete++;
+  });
+  const pct = Math.round((complete / 15) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = complete + ' / 15 specimens complete';
+}
+
+function updateSAProgress() { updateProgress(); }
+
+// ====== VALIDATE ======
+function validateAll() {
+  const allIds = ['S1', ...specimens.map(s => s.id)];
+  const incomplete = [];
+  allIds.forEach(id => {
+    const n = document.getElementById(id + '-name')?.value || '';
+    const t = document.getElementById(id + '-type')?.value || '';
+    const c = document.getElementById(id + '-color')?.value || '';
+    const e = document.getElementById(id + '-env')?.value || '';
+    const j = document.getElementById(id + '-just')?.value || '';
+    if (!(n && t && c && e && j)) incomplete.push(id.replace('S','S-'));
+  });
+
+  const saIncomplete = [];
+  [1,2,3,4,5].forEach(i => {
+    const v = document.getElementById('SA' + i)?.value || '';
+    if (v.trim().length < 20) saIncomplete.push('Q' + i);
+  });
+
+  const msg = document.getElementById('valMsg');
+  if (incomplete.length === 0 && saIncomplete.length === 0) {
+    msg.className = 'val-message success';
+    msg.textContent = '✓ All sections are complete! Your form is ready to copy/print for submission.';
+  } else {
+    msg.className = 'val-message warning';
+    let text = '';
+    if (incomplete.length > 0) text += 'Incomplete specimens: ' + incomplete.join(', ') + '. ';
+    if (saIncomplete.length > 0) text += 'Short-answer questions needing more content: ' + saIncomplete.join(', ') + '.';
+    msg.textContent = '⚠ ' + text;
+  }
+}
+
+// ====== COPY FOR SUBMISSION ======
+function copySubmission() {
+  const name = document.getElementById('stu-name').value || '[Name not entered]';
+  const tid = document.getElementById('stu-id').value || '[ID not entered]';
+  const sec = document.getElementById('stu-section').value || '[Section not entered]';
+  const date = document.getElementById('stu-date').value || '[Date not entered]';
+
+  let out = `EES 2001 — PHYSICAL GEOLOGY: SEDIMENTARY ROCKS LAB
+Name: ${name} | Temple ID: ${tid} | Section: ${sec} | Date: ${date}
+${'='.repeat(70)}
+
+PART 1: ROCK IDENTIFICATION
+`;
+
+  const allIds = ['S1', ...specimens.map(s => s.id)];
+  allIds.forEach((id, idx) => {
+    const specLabel = id.replace('S','S-');
+    const type = document.getElementById(id + '-type')?.value || '—';
+    const gs = document.getElementById(id + '-grainsize')?.value || '—';
+    const rnd = document.getElementById(id + '-roundness')?.value || '—';
+    const srt = document.getElementById(id + '-sorting')?.value || '—';
+    const col = document.getElementById(id + '-color')?.value || '—';
+    const acid = document.querySelector(`input[name="${id}-acid"]:checked`)?.value || '—';
+    const props = document.getElementById(id + '-props')?.value || '—';
+    const nm = document.getElementById(id + '-name')?.value || '—';
+    const env = document.getElementById(id + '-env')?.value || '—';
+    const just = document.getElementById(id + '-just')?.value || '—';
+
+    out += `
+Specimen ${specLabel}
+  Rock Type:      ${type}
+  Grain Size:     ${gs}
+  Roundness:      ${rnd}
+  Sorting:        ${srt}
+  Color:          ${col}
+  HCl Reaction:   ${acid}
+  Other Props:    ${props}
+  ROCK NAME:      ${nm}
+  Environment:    ${env}
+  Justification:  ${just}
+`;
+  });
+
+  out += `
+${'='.repeat(70)}
+PART 2: SHORT ANSWER QUESTIONS
+
+Q1: ${document.getElementById('SA1').value || '—'}
+
+Q2: ${document.getElementById('SA2').value || '—'}
+
+Q3: ${document.getElementById('SA3').value || '—'}
+
+Q4: ${document.getElementById('SA4').value || '—'}
+
+Q5: ${document.getElementById('SA5').value || '—'}
+`;
+
+  // Copy to clipboard
+  navigator.clipboard.writeText(out).then(() => {
+    const msg = document.getElementById('valMsg');
+    msg.className = 'val-message success';
+    msg.textContent = '✓ Lab submission text copied to clipboard! Paste it into your Canvas submission.';
+  }).catch(() => {
+    // Fallback: open in new window
+    const w = window.open('', '_blank');
+    w.document.write('<pre style="font-family: monospace; padding: 2rem; white-space: pre-wrap;">' + out + '</pre>');
+    w.document.close();
+  });
+}
+
+// ====== CLEAR ======
+function clearForm() {
+  if (!confirm('Are you sure you want to clear the entire form? All entries will be lost.')) return;
+  document.querySelectorAll('input[type="text"], textarea, select').forEach(el => el.value = '');
+  document.querySelectorAll('.radio-option').forEach(l => l.classList.remove('selected'));
+  const allIds = ['S1', ...specimens.map(s => s.id)];
+  allIds.forEach(id => {
+    document.getElementById('preview-' + id).textContent = 'Specimen ' + id.replace('S','S-') + ' — Click to expand';
+    document.getElementById('status-' + id).textContent = 'Not started';
+    document.getElementById('status-' + id).className = 'spec-status status-empty';
+    document.getElementById('form-' + id).classList.remove('complete', 'incomplete-warning');
+  });
+  updateProgress();
+  document.getElementById('valMsg').className = 'val-message';
+}
+
+// Init progress
+updateProgress();
+</script>
+</body>
+</html>

@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sedimentary Rocks Lab — Lab Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  :root {
+    --sand: #e8d5b0;
+    --sandstone: #c8a96e;
+    --rust: #8b4513;
+    --clay: #a0522d;
+    --shale: #4a4a5a;
+    --limestone: #d4cfc5;
+    --dark: #2c2416;
+    --text: #1a1209;
+    --accent: #6b4226;
+    --highlight: #d4850a;
+    --bg: #f5ede0;
+    --card: #fdf8f0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dark);
+    color: var(--sand);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-stripe {
+    height: 6px;
+    background: repeating-linear-gradient(90deg, var(--sandstone) 0px, var(--sandstone) 40px, var(--rust) 40px, var(--rust) 80px, var(--shale) 80px, var(--shale) 120px, var(--limestone) 120px, var(--limestone) 160px);
+  }
+  .header-inner {
+    padding: 2rem 3rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+  }
+  .header-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sandstone);
+    margin-bottom: 0.25rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--sand);
+  }
+  header h1 em {
+    font-style: italic;
+    color: var(--sandstone);
+  }
+  .header-meta {
+    margin-left: auto;
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--limestone);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  /* NAV TABS */
+  .tab-nav {
+    background: var(--accent);
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    padding: 0 2rem;
+  }
+  .tab-btn {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    background: none;
+    border: none;
+    padding: 0.85rem 1.4rem;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { color: white; }
+  .tab-btn.active {
+    color: var(--sand);
+    border-bottom-color: var(--sandstone);
+  }
+
+  /* MAIN LAYOUT */
+  .content-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+  }
+
+  /* SECTION PANELS */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .section-intro {
+    background: var(--card);
+    border-left: 4px solid var(--highlight);
+    padding: 1.2rem 1.5rem;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+  .section-intro p { margin-bottom: 0.5rem; }
+  .section-intro p:last-child { margin-bottom: 0; }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid #ddd3c0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e0d5c0;
+  }
+  .card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--rust);
+    margin: 1rem 0 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .card p { margin-bottom: 0.6rem; color: #3a2d1e; font-size: 0.93rem; }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* KEY TERMS */
+  .term-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+  }
+  .term-item {
+    background: #f0e8d5;
+    border: 1px solid #d4c5a8;
+    border-radius: 5px;
+    padding: 0.7rem 1rem;
+  }
+  .term-name {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--rust);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.25rem;
+  }
+  .term-def { font-size: 0.85rem; color: #4a3520; }
+
+  /* PROCESS DIAGRAM */
+  .process-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+    justify-content: center;
+  }
+  .step-box {
+    background: var(--shale);
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-align: center;
+    min-width: 110px;
+  }
+  .step-arrow {
+    font-size: 1.1rem;
+    color: var(--highlight);
+    margin: 0 0.3rem;
+    font-weight: 700;
+  }
+
+  /* TABLE */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+  }
+  .data-table th {
+    background: var(--accent);
+    color: var(--sand);
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .data-table td {
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid #e0d5c0;
+    color: #3a2d1e;
+    vertical-align: top;
+  }
+  .data-table tr:nth-child(even) td { background: #f8f3ea; }
+  .data-table tr:hover td { background: #f0e8d5; }
+
+  /* GRAIN SIZE VISUAL */
+  .grain-visual {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1rem;
+    background: #f0e8d5;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    flex-wrap: wrap;
+  }
+  .grain-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    flex: 1;
+    min-width: 70px;
+  }
+  .grain-circle {
+    background: var(--clay);
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+  .grain-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .grain-size-text {
+    font-size: 0.68rem;
+    color: #6b5540;
+    text-align: center;
+  }
+
+  /* ACCORDION */
+  .accordion-item {
+    border: 1px solid #d4c5a8;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+  .accordion-header {
+    background: #f0e8d5;
+    padding: 0.7rem 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--accent);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .accordion-header:hover { background: #e8dcc8; }
+  .accordion-header.open { background: var(--accent); color: var(--sand); }
+  .accordion-icon { font-size: 1rem; transition: transform 0.2s; }
+  .accordion-header.open .accordion-icon { transform: rotate(45deg); }
+  .accordion-body {
+    padding: 1rem;
+    font-size: 0.88rem;
+    color: #3a2d1e;
+    background: var(--card);
+    display: none;
+  }
+  .accordion-body.open { display: block; }
+  .accordion-body p { margin-bottom: 0.5rem; }
+  .accordion-body p:last-child { margin-bottom: 0; }
+
+  /* CALLOUT BOXES */
+  .callout {
+    border-radius: 5px;
+    padding: 0.8rem 1rem;
+    margin: 0.8rem 0;
+    font-size: 0.88rem;
+  }
+  .callout-tip { background: #e8f4e8; border-left: 3px solid #5a8a5a; color: #2a4a2a; }
+  .callout-note { background: #e8eef8; border-left: 3px solid #4a6a9a; color: #1a2a4a; }
+  .callout-warning { background: #f8f0e0; border-left: 3px solid #c08020; color: #4a3010; }
+
+  /* LAB OVERVIEW */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .overview-card {
+    background: var(--dark);
+    color: var(--sand);
+    border-radius: 6px;
+    padding: 1.2rem;
+    text-align: center;
+  }
+  .overview-card .oc-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .overview-card .oc-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--sandstone);
+    margin-bottom: 0.3rem;
+  }
+  .overview-card .oc-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+  }
+
+  /* ROCK TYPE BADGES */
+  .badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .badge-clastic { background: #8b4513; color: white; }
+  .badge-chemical { background: #4a6a9a; color: white; }
+  .badge-biochemical { background: #5a8a5a; color: white; }
+  .badge-organic { background: #3a3a3a; color: white; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--dark);
+    color: var(--limestone);
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    margin-top: 3rem;
+  }
+  .footer a { color: var(--sandstone); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .header-inner { flex-direction: column; gap: 0.5rem; }
+    .header-meta { text-align: left; margin-left: 0; }
+    header h1 { font-size: 1.7rem; }
+    .overview-grid { grid-template-columns: 1fr; }
+    .process-steps { flex-direction: column; gap: 0.3rem; }
+    .step-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div>
+      <div class="header-label">EES 2001 · Physical Geology</div>
+      <h1>Sedimentary Rocks<br><em>Laboratory Guide</em></h1>
+    </div>
+    <div class="header-meta">
+      Lab 5 of 10<br>
+      Estimated time: 2 hours<br>
+      Refer to lecture slides for additional context
+    </div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('overview', this)">Overview</button>
+  <button class="tab-btn" onclick="showTab('weathering', this)">Weathering</button>
+  <button class="tab-btn" onclick="showTab('classification', this)">Classification</button>
+  <button class="tab-btn" onclick="showTab('clastic', this)">Clastic Rocks</button>
+  <button class="tab-btn" onclick="showTab('chemical', this)">Chemical Rocks</button>
+  <button class="tab-btn" onclick="showTab('structures', this)">Sed. Structures</button>
+  <button class="tab-btn" onclick="showTab('environments', this)">Environments</button>
+</nav>
+
+<div class="content-wrap">
+
+  <!-- ======= OVERVIEW ======= -->
+  <div id="tab-overview" class="tab-panel active">
+
+    <div class="card">
+      <h2>Lab Introduction</h2>
+      <p>This lab introduces you to sedimentary rocks — the record of Earth's surface environments. By understanding how these rocks form, you can read them like pages in a book, extracting information about ancient climates, landscapes, and oceans.</p>
+      <p>Sedimentary rocks and sediments cover <strong>~70% of Earth's surface</strong>, yet they represent less than 1% of Earth's total volume — a thin but information-rich "surface veneer."</p>
+    </div>
+
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="oc-icon">🪨</div>
+        <div class="oc-label">Rock Types</div>
+        <div class="oc-value">Clastic · Chemical · Biochemical</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-icon">🔬</div>
+        <div class="oc-label">Key Properties</div>
+        <div class="oc-value">Grain size · Sorting · Roundness</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-icon">🗺</div>
+        <div class="oc-label">Goal</div>
+        <div class="oc-value">Identify rocks + interpret their environment</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Learning Objectives</h2>
+      <p>By the end of this lab, you will be able to:</p>
+      <div class="term-grid">
+        <div class="term-item"><div class="term-name">Classify</div><div class="term-def">Distinguish clastic, chemical, and biochemical sedimentary rocks.</div></div>
+        <div class="term-item"><div class="term-name">Describe Texture</div><div class="term-def">Identify grain size, sorting, and roundness from hand specimens or images.</div></div>
+        <div class="term-item"><div class="term-name">ID Key Rocks</div><div class="term-def">Identify shale, sandstone, conglomerate, limestone, chert, coal, and more.</div></div>
+        <div class="term-item"><div class="term-name">Interpret</div><div class="term-def">Link rock properties to depositional environment and transport history.</div></div>
+        <div class="term-item"><div class="term-name">Use ID Keys</div><div class="term-def">Apply texture → composition → identification decision trees.</div></div>
+        <div class="term-item"><div class="term-name">Recognize Structures</div><div class="term-def">Identify cross-bedding, graded bedding, mudcracks, and fossils.</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Lab Materials</h2>
+      <p>For this lab, you will use:</p>
+      <ul style="margin: 0.5rem 0 0 1.2rem; font-size: 0.92rem; color: #3a2d1e;">
+        <li>This interactive lab guide (Site 1 of 3)</li>
+        <li><strong>Rock identification site</strong> with specimen images (Site 2 of 3)</li>
+        <li><strong>Lab ID form</strong> — your submission document (Site 3 of 3)</li>
+        <li>Your course textbook and lecture notes as reference</li>
+      </ul>
+      <div class="callout callout-note" style="margin-top: 1rem;">
+        <strong>How to navigate this lab:</strong> Use this guide to review concepts as you work through the rock specimens. The ID tables on this page match the identification site. Record all answers on the ID form.
+      </div>
+    </div>
+
+  </div><!-- /overview -->
+
+
+  <!-- ======= WEATHERING ======= -->
+  <div id="tab-weathering" class="tab-panel">
+
+    <div class="section-intro">
+      <p>All clastic sedimentary rocks begin with the breakdown of pre-existing rock through weathering. Understanding <em>how</em> rocks weather helps explain the textures and mineralogy of the sedimentary rocks they become.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Clastic Sedimentary Path</h2>
+      <p>Clastic (detrital) sedimentary rocks form through a chain of surface processes:</p>
+      <div class="process-steps">
+        <div class="step-box">Parent Rock</div>
+        <div class="step-arrow">→</div>
+        <div class="step-box">Weathering</div>
+        <div class="step-arrow">→</div>
+        <div class="step-box">Erosion / Transport</div>
+        <div class="step-arrow">→</div>
+        <div class="step-box">Deposition</div>
+        <div class="step-arrow">→</div>
+        <div class="step-box">Lithification</div>
+      </div>
+      <p style="margin-top: 0.8rem; font-size: 0.88rem; color: #5a4030;">Transport agents include water, wind, ice (glaciers), and gravity. Each agent leaves distinctive textural signatures in the resulting rock.</p>
+    </div>
+
+    <div class="card">
+      <h2>Physical (Mechanical) Weathering</h2>
+      <p>Physical weathering breaks rock into smaller pieces <em>without changing its chemistry</em>. Key processes include:</p>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Pressure Unloading (Exfoliation) <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <p>When overlying rock is removed by erosion, rocks that formed under great pressure can expand and fracture parallel to the surface. This produces <strong>exfoliation domes</strong> (e.g., Half Dome in Yosemite) and joint-bounded blocks.</p>
+          <p>The removal of overburden allows the rock to "rebound" — sheets peel off like layers of an onion.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Frost Wedging <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <p>Water seeps into cracks, freezes, and expands by ~9% in volume. This wedges the crack wider. Repeated freeze-thaw cycles progressively break the rock apart — familiar to anyone who has seen potholes in Pennsylvania roads or frost-shattered rocks in the mountains.</p>
+          <p>Most effective in climates with frequent freeze-thaw cycles; produces angular fragments (no transport = no rounding).</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Biologic Action <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <p>Living organisms can physically break down rock: tree roots growing into cracks, burrowing animals, even herds of grazing animals compacting and disturbing soil. These are physical processes — no chemical change required.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-tip">
+        <strong>Key insight:</strong> Physical weathering increases surface area without changing composition — which then accelerates chemical weathering!
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Chemical Weathering</h2>
+      <p>Chemical weathering <em>changes the mineral composition</em> of rock through reactions with water, oxygen, and acids:</p>
+      <table class="data-table">
+        <thead><tr><th>Process</th><th>What Happens</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Dissolution</strong></td><td>Mineral breaks into ions in water</td><td>Limestone dissolving in rainwater</td></tr>
+          <tr><td><strong>Oxidation</strong></td><td>Reaction with free oxygen alters the mineral</td><td>Iron → Hematite (rust-red color)</td></tr>
+          <tr><td><strong>Hydrolysis</strong></td><td>H⁺ or OH⁻ replaces an ion in the mineral</td><td>Feldspar → Clay minerals</td></tr>
+          <tr><td><strong>Leaching</strong></td><td>Ions are removed by moving water</td><td>Na⁺, K⁺ carried away from granite</td></tr>
+          <tr><td><strong>Dehydration</strong></td><td>Removal of H⁺ or OH⁻ ion from mineral</td><td>Goethite → Hematite</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Mineral Stability During Weathering</h2>
+      <p>Minerals crystallize at different temperatures in Bowen's Reaction Series. Minerals that form at the <em>highest temperatures</em> (olivine, pyroxene) are <em>least stable</em> at the Earth's surface and weather fastest. Minerals that form last (quartz) are the most stable.</p>
+      <table class="data-table">
+        <thead><tr><th>Mineral</th><th>Stability at Surface</th><th>Weathering Product</th></tr></thead>
+        <tbody>
+          <tr><td>Quartz</td><td>Very High — most resistant</td><td>Remains as quartz grains</td></tr>
+          <tr><td>Potassium Feldspar</td><td>Moderate</td><td>Clay minerals + K⁺ ions</td></tr>
+          <tr><td>Muscovite</td><td>Moderate</td><td>Clay minerals</td></tr>
+          <tr><td>Biotite</td><td>Low-Moderate</td><td>Clay minerals</td></tr>
+          <tr><td>Plagioclase Feldspar</td><td>Low</td><td>Clay minerals + Na⁺, Ca²⁺ ions</td></tr>
+          <tr><td>Pyroxene / Amphibole</td><td>Low</td><td>Clay minerals + Hematite/Goethite</td></tr>
+          <tr><td>Olivine</td><td>Very Low — weathers fastest</td><td>Clay minerals + Mg²⁺ ions</td></tr>
+        </tbody>
+      </table>
+      <div class="callout callout-note" style="margin-top: 0.8rem;">
+        <strong>Lab implication:</strong> If a sandstone contains fresh feldspar grains, those grains must not have traveled far from their source (otherwise they would have weathered away). This tells you about transport distance!
+      </div>
+    </div>
+
+  </div><!-- /weathering -->
+
+
+  <!-- ======= CLASSIFICATION ======= -->
+  <div id="tab-classification" class="tab-panel">
+
+    <div class="section-intro">
+      <p>Identifying a sedimentary rock follows a systematic process. The first step is always <strong>texture</strong> — what does the rock look like at the grain scale? This determines which ID table you use.</p>
+    </div>
+
+    <div class="card">
+      <h2>Types of Sedimentary Rocks</h2>
+      <div class="term-grid">
+        <div class="term-item">
+          <div class="term-name"><span class="badge badge-clastic">Clastic / Detrital</span></div>
+          <div class="term-def" style="margin-top: 0.4rem;">Made of physical sediment fragments (rock/mineral grains) deposited by erosion and transport. Classified by <em>grain size and shape</em>.</div>
+        </div>
+        <div class="term-item">
+          <div class="term-name"><span class="badge badge-chemical">Chemical</span></div>
+          <div class="term-def" style="margin-top: 0.4rem;">Precipitated directly from solution (ions in water). Classified primarily by <em>composition</em>.</div>
+        </div>
+        <div class="term-item">
+          <div class="term-name"><span class="badge badge-biochemical">Biochemical</span></div>
+          <div class="term-def" style="margin-top: 0.4rem;">Chemical sediments formed or concentrated by organisms (shells, skeletons, plant material). Classified by <em>composition and texture</em>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Texture-Based ID Decision Tree</h2>
+      <p>Always start here — this tells you which classification table to use.</p>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Step 1: Are grains visible? <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <p><strong>YES →</strong> The grains are distinct. Proceed to Step 2.</p>
+          <p><strong>NO →</strong> The rock has a fine-grained clastic or microcrystalline texture. Proceed to the fine-grained decision tree (Step 4).</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Step 2: Are grains intergrown or distinct? <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <p><strong>Intergrown (locked together, no open spaces)</strong> → <strong>Crystalline texture</strong>. Use the crystalline ID path (Step 3a).</p>
+          <p><strong>Distinct from each other</strong> → <strong>Clastic texture</strong>. Classify by grain size, shape, composition using Table 4.4 (Clastic Rocks tab).</p>
+          <p><strong>Fossils or fossil fragments visible</strong> → Rock is <strong>fossiliferous</strong>. Likely limestone, dolostone, or coal. Use Table 4.5 (Chemical Rocks tab).</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Step 3a: Crystalline texture — hardness/acid tests <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <p><strong>Easily scratched by fingernail</strong> → Rock Gypsum (hardness ~2)</p>
+          <p><strong>Harder than fingernail, softer than penny, tastes salty</strong> → Rock Salt (Halite)</p>
+          <p><strong>~Hardness of a penny + vigorous fizz in dilute HCl</strong> → Limestone</p>
+          <p><strong>~Hardness of a penny + slow/weak fizz in dilute HCl</strong> → Dolostone</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Step 4: Fine-grained / microcrystalline texture <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <p><strong>Scratches glass + conchoidal fracture + doesn't crumble</strong> → Chert, Flint, or Jasper</p>
+          <p><strong>Black, low density, combustible</strong> → Coal</p>
+          <p><strong>~Hardness of penny + vigorous fizz in HCl</strong> → Limestone (micritic)</p>
+          <p><strong>~Hardness of penny + slow fizz in HCl</strong> → Dolostone</p>
+          <p><strong>Feels gritty on teeth + scratches glass</strong> → Siltstone</p>
+          <p><strong>Feels smooth on teeth</strong> → Claystone; breaks with conchoidal fracture → Mudstone; fissile (splits in layers) → Shale</p>
+          <p><strong>Easily scratched by fingernail</strong> → Rock Gypsum</p>
+          <p><strong>Softer than penny + salty taste</strong> → Rock Salt</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Clastic Rock Classification (Table 4.4)</h2>
+      <table class="data-table">
+        <thead><tr><th>Grain Size</th><th>Key Comments</th><th>Rock Name</th></tr></thead>
+        <tbody>
+          <tr><td>"Gravel" (&gt;2 mm) — Rounded grains</td><td>Rounded. May be modified by composition (e.g., quartz-pebble conglomerate). Clastic texture.</td><td><strong>Conglomerate</strong></td></tr>
+          <tr><td>"Gravel" (&gt;2 mm) — Angular grains</td><td>Angular fragments. May be modified by dominant grain type (e.g., chert breccia). Clastic texture.</td><td><strong>Breccia</strong></td></tr>
+          <tr><td>Sand (0.06–2 mm) — >95% quartz</td><td>Grains well rounded and well sorted. Clastic texture.</td><td><strong>Quartz Sandstone</strong></td></tr>
+          <tr><td>Sand (0.06–2 mm) — quartz + >25% feldspar</td><td>Grains commonly angular, poorly sorted. Often reddish. Clastic texture.</td><td><strong>Arkose</strong></td></tr>
+          <tr><td>Sand (0.06–2 mm) — mixed composition</td><td>Quartz, feldspar, rock fragments, clay. Angular, poorly sorted. Dark color common. Clastic texture.</td><td><strong>Graywacke</strong></td></tr>
+          <tr><td>Silt (0.004–0.06 mm)</td><td>Feels gritty on teeth. Commonly massive. Fine grained.</td><td><strong>Siltstone</strong></td></tr>
+          <tr><td>Clay (&lt;0.004 mm) — breaks into blocks</td><td>Feels smooth on teeth. Conchoidal fracture.</td><td><strong>Mudstone</strong></td></tr>
+          <tr><td>Clay (&lt;0.004 mm) — splits in layers</td><td>Feels smooth on teeth. Fissile (splits along parallel planes).</td><td><strong>Shale</strong></td></tr>
+          <tr><td>Clay (&lt;0.004 mm) — laminated</td><td>Commonly laminated. Fine grained. Smooth on teeth.</td><td><strong>Claystone</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Chemical / Biochemical Rock Classification (Table 4.5)</h2>
+      <table class="data-table">
+        <thead><tr><th>Composition</th><th>Comments</th><th>Rock Name</th></tr></thead>
+        <tbody>
+          <tr><td>Calcite (CaCO₃)</td><td>Crystalline texture; all effervescence with dilute HCl</td><td><strong>Crystalline Limestone</strong></td></tr>
+          <tr><td>Calcite (CaCO₃)</td><td>Microcrystalline; breaks with conchoidal fracture</td><td><strong>Micritic Limestone</strong></td></tr>
+          <tr><td>Calcite (CaCO₃)</td><td>Sand-size spheres with concentric layers (ooids). Clastic texture.</td><td><strong>Oolitic Limestone</strong></td></tr>
+          <tr><td>Calcite (CaCO₃)</td><td>Abundant fossils or fossil debris cemented together. Bioclastic texture.</td><td><strong>Fossiliferous Limestone</strong></td></tr>
+          <tr><td>Calcite (CaCO₃)</td><td>Poorly cemented shell fragments; little to no matrix.</td><td><strong>Coquina</strong></td></tr>
+          <tr><td>Calcite (CaCO₃)</td><td>Fine-grained, massive, earthy, poorly cemented, generally white.</td><td><strong>Chalk</strong></td></tr>
+          <tr><td>Dolomite (CaMg[CO₃]₂)</td><td>Weak fizz with HCl; powder fizzes more strongly. Commonly crystalline.</td><td><strong>Dolostone</strong></td></tr>
+          <tr><td>Quartz (SiO₂)</td><td>Dense, microcrystalline, hardness = 7. Conchoidal fracture.</td><td><strong>Chert / Flint / Jasper</strong></td></tr>
+          <tr><td>Gypsum (CaSO₄·2H₂O)</td><td>Massive, crystalline, soft (scratched by fingernail), white to gray.</td><td><strong>Rock Gypsum</strong></td></tr>
+          <tr><td>Halite (NaCl)</td><td>Massive, crystalline, tastes like salt, white/clear/gray/reddish.</td><td><strong>Rock Salt</strong></td></tr>
+          <tr><td>Plant debris (mostly C)</td><td>Black, shiny to earthy luster, low density. Plant fossils may be visible. Combustible.</td><td><strong>Coal</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /classification -->
+
+
+  <!-- ======= CLASTIC ======= -->
+  <div id="tab-clastic" class="tab-panel">
+
+    <div class="section-intro">
+      <p>Clastic rocks are defined by the physical properties of their grains. Learning to assess grain size, roundness, and sorting is the core skill for identifying and interpreting these rocks.</p>
+    </div>
+
+    <div class="card">
+      <h2>Grain Size</h2>
+      <p>Grain size is the single most important property for classifying clastic rocks. Use the Wentworth Scale:</p>
+
+      <div class="grain-visual">
+        <div class="grain-item">
+          <div class="grain-circle" style="width: 52px; height: 52px;"></div>
+          <div class="grain-label">Pebbles</div>
+          <div class="grain-size-text">4–64 mm</div>
+        </div>
+        <div class="grain-item">
+          <div class="grain-circle" style="width: 28px; height: 28px;"></div>
+          <div class="grain-label">Granules</div>
+          <div class="grain-size-text">2–4 mm</div>
+        </div>
+        <div class="grain-item">
+          <div class="grain-circle" style="width: 16px; height: 16px;"></div>
+          <div class="grain-label">Coarse Sand</div>
+          <div class="grain-size-text">0.5–2 mm</div>
+        </div>
+        <div class="grain-item">
+          <div class="grain-circle" style="width: 9px; height: 9px;"></div>
+          <div class="grain-label">Med. Sand</div>
+          <div class="grain-size-text">0.25–0.5 mm</div>
+        </div>
+        <div class="grain-item">
+          <div class="grain-circle" style="width: 5px; height: 5px;"></div>
+          <div class="grain-label">Fine Sand</div>
+          <div class="grain-size-text">0.06–0.25 mm</div>
+        </div>
+        <div class="grain-item">
+          <div class="grain-circle" style="width: 3px; height: 3px; opacity: 0.5;"></div>
+          <div class="grain-label">Silt</div>
+          <div class="grain-size-text">0.004–0.06 mm</div>
+        </div>
+        <div class="grain-item">
+          <div class="grain-circle" style="width: 1.5px; height: 1.5px; opacity: 0.3;"></div>
+          <div class="grain-label">Clay</div>
+          <div class="grain-size-text">&lt;0.004 mm</div>
+        </div>
+      </div>
+
+      <div class="callout callout-tip">
+        <strong>Practical test:</strong> Rub the rock gently on your teeth. Gritty = silt-sized grains (siltstone). Smooth = clay-sized particles (claystone, shale). Coarser grains (sand and above) are visible to the eye or under a hand lens.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Grain Roundness</h2>
+      <p>Roundness reflects how far a grain has traveled. Angular grains have sharp edges and come from near-source or glacial environments. Well-rounded grains have traveled long distances and experienced extensive abrasion.</p>
+      <table class="data-table">
+        <thead><tr><th>Term</th><th>Description</th><th>Interpretation</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Very Angular</strong></td><td>Sharp, jagged edges; no rounding visible</td><td>Little to no transport (rockfall, glacial)</td></tr>
+          <tr><td><strong>Angular</strong></td><td>Sharp edges with slight wear</td><td>Short transport distance</td></tr>
+          <tr><td><strong>Subangular</strong></td><td>Some rounding, but corners still sharp</td><td>Moderate transport</td></tr>
+          <tr><td><strong>Subrounded</strong></td><td>Corners rounded, but faces still flat</td><td>Significant transport</td></tr>
+          <tr><td><strong>Rounded</strong></td><td>Smooth curves; no sharp corners</td><td>Long transport distance</td></tr>
+          <tr><td><strong>Well Rounded</strong></td><td>Nearly spherical; completely smooth</td><td>Very long transport (aeolian/fluvial)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Grain Sorting</h2>
+      <p>Sorting describes how uniform the grain sizes are. Well-sorted sediment (all grains the same size) indicates prolonged or selective transport. Poorly sorted sediment indicates rapid deposition with little selection.</p>
+      <table class="data-table">
+        <thead><tr><th>Sorting</th><th>Description</th><th>Typical Environment</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Very Well Sorted</strong></td><td>Nearly identical grain sizes</td><td>Beach, aeolian (dune)</td></tr>
+          <tr><td><strong>Well Sorted</strong></td><td>Grains mostly one size</td><td>Beach, river channel (reworked)</td></tr>
+          <tr><td><strong>Moderately Sorted</strong></td><td>Some grain size variation</td><td>Most river environments</td></tr>
+          <tr><td><strong>Poorly Sorted</strong></td><td>Wide range of grain sizes mixed</td><td>Alluvial fan, glacial outwash</td></tr>
+          <tr><td><strong>Very Poorly Sorted</strong></td><td>Extreme grain size range; boulders to clay</td><td>Glacial till, debris flow</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Sandstone Mineralogy: What Minerals Tell You</h2>
+      <p>For coarser-grained rocks (sand-size and above), mineral content provides critical information:</p>
+      <div class="callout callout-warning">
+        <strong>Key question:</strong> If easily-weathered minerals (feldspar, amphibole) are present in a sandstone, what does that tell you about how far the sediment traveled from its source?
+      </div>
+      <table class="data-table" style="margin-top: 0.8rem;">
+        <thead><tr><th>Mineral Present</th><th>Stability</th><th>What It Implies</th></tr></thead>
+        <tbody>
+          <tr><td>Quartz only (&gt;95%)</td><td>Very high</td><td>Long transport, mature sediment → <em>Quartz arenite</em></td></tr>
+          <tr><td>Quartz + &gt;25% feldspar</td><td>Medium (feldspar)</td><td>Near source, quick burial → <em>Arkose</em></td></tr>
+          <tr><td>Quartz + feldspar + rock fragments + clay</td><td>Low (mixed)</td><td>Rapidly deposited, poorly weathered → <em>Graywacke</em></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /clastic -->
+
+
+  <!-- ======= CHEMICAL ======= -->
+  <div id="tab-chemical" class="tab-panel">
+
+    <div class="section-intro">
+      <p>Chemical and biochemical sedimentary rocks form from precipitation out of solution or from the accumulation of organic material. Composition — not grain size — drives their classification.</p>
+    </div>
+
+    <div class="card">
+      <h2>Limestone: CaCO₃</h2>
+      <p>Limestone is the most common chemical/biochemical rock. It is composed of calcite (CaCO₃) or aragonite, and <strong>fizzes vigorously when dilute HCl is applied</strong>. It comes in many textures:</p>
+      <table class="data-table">
+        <thead><tr><th>Type</th><th>Appearance</th><th>How It Formed</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Crystalline Limestone</strong></td><td>Interlocking calcite crystals; sugary texture</td><td>Recrystallization of earlier carbonate material</td></tr>
+          <tr><td><strong>Micritic Limestone</strong></td><td>Dense, microcrystalline; gray to dark; conchoidal fracture</td><td>Accumulation of fine carbonate mud</td></tr>
+          <tr><td><strong>Oolitic Limestone</strong></td><td>Sand-like spheres (ooids) visible; grainy texture</td><td>Precipitation around grains in warm, agitated water</td></tr>
+          <tr><td><strong>Fossiliferous Limestone</strong></td><td>Abundant fossils or fossil fragments in crystalline/micritic matrix</td><td>Accumulation of shell material in carbonate seas</td></tr>
+          <tr><td><strong>Coquina</strong></td><td>Loosely cemented shell fragments; coarse texture</td><td>Accumulated shell material with little fine matrix</td></tr>
+          <tr><td><strong>Chalk</strong></td><td>White, soft, powdery; earthy</td><td>Accumulation of microscopic carbonate organisms (coccoliths, foraminifera) on deep sea floor</td></tr>
+        </tbody>
+      </table>
+      <div class="callout callout-tip" style="margin-top: 0.8rem;">
+        <strong>Remember:</strong> All of these are limestone — CaCO₃. The subtype names describe the texture and origin, but the acid test works on all of them.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Dolostone (Dolomite Rock)</h2>
+      <p>Dolostone is composed of the mineral dolomite — CaMg(CO₃)₂. It is similar to limestone but:</p>
+      <ul style="margin: 0.5rem 0 0 1.2rem; font-size: 0.9rem; color: #3a2d1e;">
+        <li>Fizzes <em>weakly</em> with dilute HCl (powder fizzes more strongly)</li>
+        <li>Often slightly harder and denser than limestone</li>
+        <li>May contain small crystal-lined cavities</li>
+        <li>Typically forms through chemical alteration of limestone after deposition</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Siliceous Rocks: SiO₂</h2>
+      <p>Chert, Flint, and Jasper are all forms of microcrystalline quartz (SiO₂). They have:</p>
+      <ul style="margin: 0.5rem 0 0 1.2rem; font-size: 0.9rem; color: #3a2d1e;">
+        <li>Hardness = 7 (will scratch glass easily)</li>
+        <li>Conchoidal (shell-like) fracture</li>
+        <li>Very dense; does not crumble</li>
+        <li>Does <em>not</em> fizz with HCl</li>
+      </ul>
+      <p style="margin-top: 0.7rem;"><strong>Chert</strong> = gray to white; <strong>Jasper</strong> = red/brown/yellow (iron staining); <strong>Flint</strong> = dark gray to black (often found in chalk deposits)</p>
+      <div class="callout callout-warning" style="margin-top: 0.8rem;">
+        <strong>Watch out:</strong> Chert nodules embedded within limestone will scratch glass even though the surrounding limestone will not. If part of your sample scratches glass but the rest doesn't, test both parts with acid to distinguish them.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Evaporites</h2>
+      <p>Evaporites form when water evaporates from a restricted basin, concentrating dissolved ions until minerals precipitate. Common in arid environments, playa lakes, and restricted marine settings.</p>
+      <table class="data-table">
+        <thead><tr><th>Rock Name</th><th>Mineral</th><th>Formula</th><th>Key Properties</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rock Gypsum</strong></td><td>Gypsum</td><td>CaSO₄·2H₂O</td><td>Soft (fingernail can scratch); white to pink; massive to crystalline</td></tr>
+          <tr><td><strong>Rock Salt</strong></td><td>Halite</td><td>NaCl</td><td>Tastes salty; cubic cleavage; harder than fingernail but softer than penny</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Coal</h2>
+      <p>Coal is the lithified, compacted remains of ancient plant material. With increasing pressure, heat, and time, it progresses through stages of increasing carbon content:</p>
+      <div class="process-steps" style="margin: 0.8rem 0;">
+        <div class="step-box" style="background: #4a3520;">Peat</div>
+        <div class="step-arrow">→</div>
+        <div class="step-box" style="background: #6b4a30;">Lignite</div>
+        <div class="step-arrow">→</div>
+        <div class="step-box" style="background: #3a3a3a;">Bituminous</div>
+        <div class="step-arrow">→</div>
+        <div class="step-box" style="background: #1a1a1a;">Anthracite</div>
+      </div>
+      <p style="font-size: 0.88rem; color: #5a4030;">Carbon content increases → Volatiles and moisture decrease → Energy content increases. Anthracite is the highest grade, with a bright black, vitreous luster.</p>
+    </div>
+
+  </div><!-- /chemical -->
+
+
+  <!-- ======= STRUCTURES ======= -->
+  <div id="tab-structures" class="tab-panel">
+
+    <div class="section-intro">
+      <p>Sedimentary structures are physical features preserved in the rock that record conditions at the time of deposition. They are our primary tool for interpreting ancient environments.</p>
+    </div>
+
+    <div class="card">
+      <h2>Primary Sedimentary Structures</h2>
+      <p>These features form during or immediately after deposition. They survive lithification and can be observed in outcrops and hand specimens.</p>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Bedding / Stratification <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <p>The most fundamental sedimentary structure. Beds (strata) represent individual depositional events. Governed by <strong>Steno's Laws</strong>:</p>
+          <ul style="margin: 0.4rem 0 0 1.2rem;">
+            <li><strong>Superposition:</strong> In an undisturbed sequence, younger beds lie above older beds</li>
+            <li><strong>Original Horizontality:</strong> Beds are deposited horizontally; tilted beds have been deformed</li>
+            <li><strong>Lateral Continuity:</strong> Beds extend laterally until they thin out or reach the edge of the basin</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Cross-Bedding <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <p>Inclined layers within a larger bed, formed by migrating bedforms (dunes, ripples). The inclined layers dip in the direction of current flow — this is a powerful <strong>paleocurrent indicator</strong>.</p>
+          <p><strong>Large-scale cross-beds</strong> (meters thick) → aeolian (wind) dunes. <strong>Small-scale cross-beds</strong> → subaqueous ripples or small dunes in rivers or shallow marine settings.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Graded Bedding <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <p>A single bed that grades from coarser grains at the base to finer grains at the top. Forms when a turbulent current slows down — larger grains settle first, smaller grains later.</p>
+          <p>Classic indicator of <strong>turbidite deposits</strong> (turbidity currents on continental slopes), though also found in other high-energy, waning flow environments.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Ripple Marks <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <p><strong>Current ripples</strong> are asymmetric — gentle upstream side, steep downstream side. Direction of steeper side = current direction.</p>
+          <p><strong>Wave ripples</strong> are symmetric — equal slopes on both sides. Indicate oscillating wave energy, typically shallow marine or lacustrine.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Mudcracks (Desiccation Cracks) <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <p>Polygonal cracks formed when wet mud dries out and shrinks. A reliable indicator of <strong>subaerial exposure</strong> — the sediment was above water long enough to dry out.</p>
+          <p>Common in floodplains, tidal flats, and playa lakes. When lithified, the cracks may be filled with a different material, preserved as a pattern in the rock surface.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Fossils <span class="accordion-icon">+</span>
+        </div>
+        <div class="accordion-body">
+          <p>Preserved remains or traces of organisms. Fossils constrain depositional environment (marine vs. freshwater vs. terrestrial), water depth, climate, and age.</p>
+          <p>Marine fossils (corals, brachiopods, crinoids) indicate open marine conditions. Plant fossils suggest terrestrial or swampy environments. Freshwater bivalves and fish indicate lacustrine settings.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-note">
+      <strong>Key point:</strong> Sedimentary structures are often the only evidence we have for interpreting the depositional environment of ancient rocks. Always note their presence when examining a rock outcrop.
+    </div>
+
+  </div><!-- /structures -->
+
+
+  <!-- ======= ENVIRONMENTS ======= -->
+  <div id="tab-environments" class="tab-panel">
+
+    <div class="section-intro">
+      <p>The ultimate goal of sedimentary rock analysis is interpretation: what does this rock tell us about where and how it formed? Different depositional environments leave distinctive rock assemblages.</p>
+    </div>
+
+    <div class="card">
+      <h2>Depositional Environments & Characteristic Rocks</h2>
+      <table class="data-table">
+        <thead><tr><th>Environment</th><th>Setting</th><th>Characteristic Rocks & Features</th></tr></thead>
+        <tbody>
+          <tr><td><strong>River Channel</strong></td><td>Continental</td><td>Pebble conglomerate and sandstone; cross-beds; current ripple marks; discontinuous beds</td></tr>
+          <tr><td><strong>Floodplain</strong></td><td>Continental</td><td>Shale and mudstone; possible mudcracks; root traces; soil horizons</td></tr>
+          <tr><td><strong>Alluvial Fan</strong></td><td>Continental</td><td>Pebble-to-boulder conglomerate; arkosic sandstone; poor sorting; cross-bedded</td></tr>
+          <tr><td><strong>Base of Cliff / Steep Slope</strong></td><td>Continental</td><td>Breccia (angular fragments)</td></tr>
+          <tr><td><strong>Aeolian Dune</strong></td><td>Continental</td><td>Well-sorted sandstone; large-scale cross-beds</td></tr>
+          <tr><td><strong>Glacial Till</strong></td><td>Continental</td><td>Tillite: poorly sorted, unlayered; particles angular to rounded; some scratched (striated)</td></tr>
+          <tr><td><strong>Swamp / Peat Bog</strong></td><td>Continental</td><td>Coal</td></tr>
+          <tr><td><strong>Freshwater Lake</strong></td><td>Continental</td><td>Shale; freshwater limestone away from shore; sandstone/conglomerate near shore</td></tr>
+          <tr><td><strong>Playa Lake</strong></td><td>Continental</td><td>Evaporites; mudstone; mudcracks</td></tr>
+          <tr><td><strong>Delta</strong></td><td>Transitional</td><td>Mixed marine and nonmarine sandstone, siltstone, mudstone; coal; plant debris</td></tr>
+          <tr><td><strong>Beach / Barrier Island</strong></td><td>Transitional</td><td>Fine- to medium-grained, well-sorted sandstone; cross-beds common</td></tr>
+          <tr><td><strong>Tidal Flat</strong></td><td>Transitional</td><td>Mudstone, siltstone, fine sandstone; ripple marks; bidirectional cross-beds; mudcracks; evaporites possible</td></tr>
+          <tr><td><strong>Inner Shelf</strong></td><td>Marine</td><td>Fine-grained sandstones; cross-beds and ripple marks common</td></tr>
+          <tr><td><strong>Middle Shelf</strong></td><td>Marine</td><td>Siltstones, claystones; marine fossils common</td></tr>
+          <tr><td><strong>Outer Shelf / Platform</strong></td><td>Marine</td><td>Limestones and dolostones, possibly fossiliferous</td></tr>
+          <tr><td><strong>Reef</strong></td><td>Marine</td><td>Fossiliferous limestone and dolostone; massive; coral and algae fossils</td></tr>
+          <tr><td><strong>Continental Slope</strong></td><td>Marine</td><td>Mudstone; graywacke with graded bedding</td></tr>
+          <tr><td><strong>Deep Marine</strong></td><td>Marine</td><td>Chert; chalk; micritic limestone; mudstone</td></tr>
+          <tr><td><strong>Evaporite Basin</strong></td><td>Marine/Continental</td><td>Evaporites: rock gypsum, rock salt</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Proximal vs. Distal</h2>
+      <p>The terms <strong>proximal</strong> (close to source) and <strong>distal</strong> (far from source) describe position within a sedimentary system:</p>
+      <table class="data-table">
+        <thead><tr><th>Property</th><th>Proximal</th><th>Distal</th></tr></thead>
+        <tbody>
+          <tr><td>Grain size</td><td>Coarser (gravel, coarse sand)</td><td>Finer (fine sand, silt, clay)</td></tr>
+          <tr><td>Roundness</td><td>More angular</td><td>More rounded</td></tr>
+          <tr><td>Sorting</td><td>Poorly sorted</td><td>Better sorted</td></tr>
+          <tr><td>Example rocks</td><td>Conglomerate, arkose</td><td>Shale, quartz sandstone</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Fluvial (River) System in Detail</h2>
+      <p>Rivers deposit different sediments in different parts of their system. This is a key concept for interpreting fluvial rock sequences:</p>
+      <ul style="margin: 0.5rem 0 0 1.2rem; font-size: 0.9rem; color: #3a2d1e; line-height: 1.8;">
+        <li><strong>Within the channel:</strong> Larger grains (sand, gravel) settle out of the fast-moving water. Produces cross-bedded sandstone and conglomerate.</li>
+        <li><strong>On the floodplain (during floods):</strong> Fine muds and clays are carried by the overflowing water and settle slowly. Produces mudstone and shale with possible root traces and mudcracks (when dry season follows).</li>
+        <li>An alternating sequence of coarser channel deposits and finer floodplain deposits is a characteristic signature of ancient river systems.</li>
+      </ul>
+    </div>
+
+  </div><!-- /environments -->
+
+</div><!-- /content-wrap -->
+
+<footer class="footer">
+  <p>EES 2001 — Physical Geology | Sedimentary Rocks Lab Guide | <a href="sed-rock-id.html">→ Go to Rock ID Site</a> | <a href="lab-form.html">→ Go to Lab Form</a></p>
+</footer>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function toggleAccordion(header) {
+    const body = header.nextElementSibling;
+    const isOpen = header.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.accordion-header').forEach(h => {
+      h.classList.remove('open');
+      h.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      header.classList.add('open');
+      body.classList.add('open');
+    }
+  }
+</script>
+</body>
+</html>
