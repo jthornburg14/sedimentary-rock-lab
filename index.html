@@ -379,9 +379,83 @@
     .process-steps { flex-direction: column; gap: 0.3rem; }
     .step-arrow { transform: rotate(90deg); }
   }
+
+  /* SITE NAV BAR */
+  .site-nav {
+    background: #1a0f08;
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border-bottom: 2px solid var(--highlight);
+  }
+  .site-nav-brand {
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    padding: 0.6rem 1.2rem 0.6rem 0;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  .site-nav-step {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.15s;
+  }
+  .site-nav-step:hover .step-label { color: var(--sand); }
+  .site-nav-step:hover { border-bottom-color: rgba(200,169,110,0.4); }
+  .site-nav-step.current { border-bottom-color: var(--sandstone); }
+  .step-num {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+  .site-nav-step.current .step-num {
+    background: var(--sandstone);
+    color: var(--dark);
+  }
+  .step-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    white-space: nowrap;
+    transition: color 0.15s;
+  }
+  .site-nav-step.current .step-label { color: var(--sand); }
+  .step-arrow {
+    color: rgba(255,255,255,0.2);
+    font-size: 0.7rem;
+    padding: 0 0.2rem;
+  }
+  @media (max-width: 600px) {
+    .site-nav { padding: 0 0.8rem; }
+    .site-nav-brand { display: none; }
+    .site-nav-step { padding: 0 0.6rem; }
+    .step-label { font-size: 0.65rem; }
+  }
 </style>
 </head>
 <body>
+
+<nav class="site-nav"><span class="site-nav-brand">EES 2001</span><span class="site-nav-step current"><span class="step-num">1</span><span class="step-label">Lab Guide</span></span><span class="step-arrow">›</span><a href="sed-rock-id.html" class="site-nav-step"><span class="step-num">2</span><span class="step-label">Rock ID</span></a><span class="step-arrow">›</span><a href="lab-form.html" class="site-nav-step"><span class="step-num">3</span><span class="step-label">Lab Form</span></a></nav>
 
 <header>
   <div class="header-stripe"></div>
